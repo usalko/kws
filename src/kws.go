@@ -204,7 +204,7 @@ func (kws *KWS) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		// Subscribe consumer to the topics
 		err = consumer.SubscribeTopics(topics, nil)
 		if err != nil {
-			fmt.Printf("Can't subscribe costumer: %v\n", err)
+			fmt.Printf("Can't subscribe consumer: %v\n", err)
 			return
 		}
 		defer consumer.Unsubscribe()
