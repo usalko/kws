@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/confluentinc/confluent-kafka-go/kafka"
@@ -60,7 +61,8 @@ type Config struct {
 func ReadKWS(filename string) []*KWS {
 	fileContent, err := ioutil.ReadFile(filename)
 	if err != nil {
-		log.Fatalf("Error while reading config.yaml file: \n%v ", err)
+		absPath, _ := filepath.Abs(filename)
+		log.Fatalf("Error while reading %v file: \n%v ", absPath, err)
 	}
 	log.Printf("%s\n%s", filename, string(fileContent))
 	var config Config
