@@ -1,4 +1,4 @@
-FROM golang:1.20.5-alpine
+FROM golang:1.21.0-alpine AS build
 
 RUN apk add --update --no-cache alpine-sdk bash python3
 
@@ -18,16 +18,20 @@ COPY ./src/ /go/src/kws/
 
 # static build the app
 WORKDIR /go/src/kws
-RUN go mod init
+# RUN go mod init
 RUN go mod tidy
-RUN go install
+RUN go install -tags=musl
 
-RUN go build -tags=static
+RUN go build -tags=musl -tags=dynamic
+
+# SHOW CONTENT FROM BUILD FOLDER
+RUN ls -la /go/src/kws
 
 # create final image
-FROM alpine
+FROM alpine:3.18.3 AS runtime
 
-COPY --from=0 /go/src/kws/kws /usr/bin/
+COPY --from=build /go/src/kws/main /usr/bin/kws
+COPY --from=build /usr/local /usr/local
 
 # RUN apk --no-cache add \
 #       cyrus-sasl \
