@@ -9,7 +9,8 @@ import (
 	"os/signal"
 )
 
-const productVersion = "0.1.1"
+const productVersion = "1.0.0"
+const releaseTag = "lola simon"
 
 func main() {
 	configFile := flag.String("config", "config.yaml", "Config file location")
@@ -18,7 +19,7 @@ func main() {
 	flag.Parse()
 
 	if *version {
-		fmt.Printf("Kws %s\n", productVersion)
+		fmt.Printf("Kws %s (%s)\n", productVersion, releaseTag)
 	} else if *initiate {
 		if _, err := os.Stat(*configFile); os.IsNotExist(err) {
 			if err := ioutil.WriteFile(*configFile, []byte(initConfig), 0644); err == nil {
