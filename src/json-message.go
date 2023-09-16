@@ -32,7 +32,7 @@ type jsonHeader struct {
 
 var rexJSONVal = regexp.MustCompile(`}$`)
 
-// JSONBytefy coverts kafka Message into JSON byte slice
+// JSONBytefy converts kafka Message into JSON byte slice
 func JSONBytefy(msg *kafka.Message, messageType string) ([]byte, error) {
 	var jsonMsg = jsonMessage{
 		Key:           string(msg.Key),
