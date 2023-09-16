@@ -19,12 +19,10 @@ if [ $COMMAND == "test" ]; then
         --no-buffer \
         --header "Connection: Upgrade" \
         --header "Upgrade: websocket" \
-        --header "Host: localhost:8801" \
-        --header "Origin: http://localhost:8801" \
+        --header "Host: localhost:8000" \
+        --header "Origin: http://localhost:8000" \
         --header "Sec-WebSocket-Key: MTIzNDU2Nzg5MDEyMzQ1Ng==" \
         --header "Sec-WebSocket-Version: 13" \
-        http://localhost:8801/ws
+        http://localhost:8000/api/ws
 fi
-
-
 
